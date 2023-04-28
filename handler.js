@@ -14,3 +14,11 @@ module.exports.updateNote = async (event) => {
     body: JSON.stringify(`The note with ${notesId} has been updated!`)
   };
 };
+
+module.exports.deleteNote = async (event) => {
+  let notesId = event.pathParameters.id;
+  return {
+    statusCode: 200,
+    body: JSON.stringify(`The note with id: ${notesId} has been deleted!`)
+  };
+};
