@@ -15,7 +15,12 @@ functions:
       - http:
           method: post
           path: notes
-
+  updateNote:
+      handler: handler.updateNote # This name is taken from handler.js
+      events:
+        - http:
+            method: put
+            path: notes/{id}
 # you can add CloudFormation resource templates here
 #resources:
 #  Resources:
