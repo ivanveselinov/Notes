@@ -27,6 +27,14 @@ functions:
         - http:
             method: delete
             path: notes/{id}
+  getAllNotes:
+      handler: handler.getAllNotes # This name is taken from handler.js
+      events:
+        - http:
+            method: get
+            path: notes
+ 
+
 # you can add CloudFormation resource templates here
 #resources:
 #  Resources:

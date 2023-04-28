@@ -22,3 +22,10 @@ module.exports.deleteNote = async (event) => {
     body: JSON.stringify(`The note with id: ${notesId} has been deleted!`)
   };
 };
+
+module.exports.getAllNotes = async (event) => {
+  return {
+    statusCode: 200,
+    body: JSON.stringify("All notes are returned")
+  };
+};
