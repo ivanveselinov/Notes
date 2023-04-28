@@ -1,5 +1,5 @@
 service: notes-api
-frameworkVersion: '2'
+frameworkVersion: "2"
 
 provider:
   name: aws
@@ -16,33 +16,35 @@ functions:
           method: post
           path: notes
   updateNote:
-      handler: handler.updateNote # This name is taken from handler.js
-      events:
-        - http:
-            method: put
-            path: notes/{id}
+    handler: handler.updateNote # This name is taken from handler.js
+    events:
+      - http:
+          method: put
+          path: notes/{id}
   deleteNote:
-      handler: handler.deleteNote # This name is taken from handler.js
-      events:
-        - http:
-            method: delete
-            path: notes/{id}
+    handler: handler.deleteNote # This name is taken from handler.js
+    events:
+      - http:
+          method: delete
+          path: notes/{id}
   getAllNotes:
-      handler: handler.getAllNotes # This name is taken from handler.js
-      events:
-        - http:
-            method: get
-            path: notes
- 
+    handler: handler.getAllNotes # This name is taken from handler.js
+    events:
+      - http:
+          method: get
+          path: notes
 
 # you can add CloudFormation resource templates here
-#resources:
-#  Resources:
-#    NewResource:
-#      Type: AWS::S3::Bucket
-#      Properties:
-#        BucketName: my-new-bucket
-#  Outputs:
-#     NewOutput:
-#       Description: "Description for the output"
-#       Value: "Some output value"
+resources:
+  Resources:
+    notesTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: notes
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: notesId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: notesId
+            KeyType: HASH
