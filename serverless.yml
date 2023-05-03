@@ -11,6 +11,12 @@ provider:
 functions:
   createNote:
     handler: handler.createNote # This name is taken from handler.js
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:PutItem
+        Resource: !GetAtt notesTable.Arn # GetAtt is getting attriby of all table from CloudFormation after line 44
+
     events:
       - http:
           method: post
@@ -33,6 +39,9 @@ functions:
       - http:
           method: get
           path: notes
+
+plugins:
+  - serverless-iam-roles-per-function # Plugin to identity-based policy allows the dynamodb:PutItem action
 
 # you can add CloudFormation resource templates here
 resources:
