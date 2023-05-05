@@ -91,6 +91,7 @@ module.exports.deleteNote = async (event, context, cb) => {
 
 module.exports.getAllNotes = async (event, context, cb) => {
   context.callbackWaitsForEmptyEventLoop = false;
+  console.log(JSON.stringify(event)); // Console.log to see information in cloudWatch
   try {
     const params = {
       TableName: NOTES_TABLE_NAME
