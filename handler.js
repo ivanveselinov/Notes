@@ -1,7 +1,5 @@
 "use strict";
 
-// merge double check
-
 // Setup to read from AWS dunamoDb
 const DynamoDb = require("aws-sdk/clients/dynamodb");
 const documentClient = new DynamoDb.DocumentClient({
