@@ -13,6 +13,7 @@ functions:
     handler: handler.createNote # This name is taken from handler.js
     environment:
       NOTES_TABLE_NAME: !Ref notesTable # !Ref is getting name of the table from Resources: TableName: notesTable
+      AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1 # Keep Lambda connection alive to reduce lagg
     iamRoleStatements:
       - Effect: Allow
         Action:
@@ -27,6 +28,7 @@ functions:
     handler: handler.updateNote # This name is taken from handler.js
     environment:
       NOTES_TABLE_NAME: !Ref notesTable # !Ref is getting name of the table from Resources: TableName: notesTable
+      AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1 # Keep Lambda connection alive to reduce lagg
     iamRoleStatements:
       - Effect: Allow
         Action:
@@ -41,6 +43,7 @@ functions:
     handler: handler.deleteNote # This name is taken from handler.js
     environment:
       NOTES_TABLE_NAME: !Ref notesTable # !Ref is getting name of the table from Resources: TableName: notesTable
+      AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1 # Keep Lambda connection alive to reduce lagg
     iamRoleStatements:
       - Effect: Allow
         Action:
@@ -55,6 +58,7 @@ functions:
     handler: handler.getAllNotes # This name is taken from handler.js
     environment:
       NOTES_TABLE_NAME: !Ref notesTable # !Ref is getting name of the table from Resources: TableName: notesTable
+      AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1 # Keep Lambda connection alive to reduce lagg
     iamRoleStatements:
       - Effect: Allow
         Action:
