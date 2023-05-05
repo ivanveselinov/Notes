@@ -80,14 +80,14 @@ module.exports.deleteNote = async (event, context, cb) => {
   }
 };
 
-// module.exports.getAllNotes = async (event, context, cb) => {
-//   try {
-//     const params = {
-//       TableName: NOTES_TABLE_NAME
-//     };
-//     const notes = await documentClient.scan(params).promise();
-//     cb(null, send(200, notes));
-//   } catch (err) {
-//     cb(null, send(500, err.message));
-//   }
-// };
+module.exports.getAllNotes = async (event, context, cb) => {
+  try {
+    const params = {
+      TableName: NOTES_TABLE_NAME
+    };
+    const notes = await documentClient.scan(params).promise();
+    cb(null, send(200, notes));
+  } catch (err) {
+    cb(null, send(500, err.message));
+  }
+};
