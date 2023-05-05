@@ -2,7 +2,13 @@
 
 // Setup to read from AWS dunamoDb
 const DynamoDb = require("aws-sdk/clients/dynamodb");
-const documentClient = new DynamoDb.DocumentClient({ region: "ap-southeast-2" });
+const documentClient = new DynamoDb.DocumentClient({
+  region: "ap-southeast-2",
+  maxRetries: 3, // Max time to retry fetching data
+  httpOptions: {
+    timeout: 5000 // Max responing time from db to lambda 5 sec
+  }
+});
 const NOTES_TABLE_NAME = process.env.NOTES_TABLE_NAME; // Fetch NOTES_TABLE_NAME FROM serverless.yml !!
 
 const send = (statusCode, data) => {
