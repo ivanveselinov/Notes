@@ -39,17 +39,31 @@ functions:
 
   deleteNote:
     handler: handler.deleteNote # This name is taken from handler.js
+    environment:
+      NOTES_TABLE_NAME: !Ref notesTable # !Ref is getting name of the table from Resources: TableName: notesTable
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:DeleteItem
+        Resource: !GetAtt notesTable.Arn # GetAtt is getting cloudFormation attribute of the table ( last lines have more info )
     events:
       - http:
           method: delete
           path: notes/{id}
 
-  getAllNotes:
-    handler: handler.getAllNotes # This name is taken from handler.js
-    events:
-      - http:
-          method: get
-          path: notes
+  # getAllNotes:
+  #   handler: handler.getAllNotes # This name is taken from handler.js
+  #   environment:
+  #     NOTES_TABLE_NAME: !Ref notesTable # !Ref is getting name of the table from Resources: TableName: notesTable
+  #   iamRoleStatements:
+  #     - Effect: Allow
+  #       Action:
+  #         - dynamodb:Scan # This will allow to get all items into table
+  #       Resource: !GetAtt notesTable.Arn # GetAtt is getting cloudFormation attribute of the table ( last lines have more info )
+  #   events:
+  #     - http:
+  #         method: get
+  #         path: notes
 
 plugins:
   - serverless-iam-roles-per-function # Plugin to identity-based policy allows the dynamodb:PutItem action
