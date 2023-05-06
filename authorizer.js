@@ -1,3 +1,11 @@
+const { CognitoJwtVerifier } = require("aws-jwt-verify"); // Install token verifier via npm i aws-jwt-verify
+
+const jwtVerifier = CognitoJwtVerifier.create({
+  userPoolId: "ap-southeast-2_EExi0IXBz",
+  tokenUse: "id",
+  clientId: "4ri6gcup5n2bh9o62rut84ho0e"
+});
+
 const generatePolicy = (principalId, effect, resource) => {
   let authResponse = {};
 
@@ -23,19 +31,17 @@ const generatePolicy = (principalId, effect, resource) => {
   return authResponse;
 };
 
-exports.handler = (event, context, cb) => {
+exports.handler = async (event, context, cb) => {
   // lambda authorized code
   let token = event.authorizationToken; // "allow or deny"
+  console.log(token);
 
-  switch (token) {
-    case "allow":
-      cb(null, generatePolicy("user", "Allow", event.methodArn));
-      break;
-
-    case "deny":
-      cb(null, generatePolicy("user", "Deny", event.methodArn));
-      break;
-    default:
-      cb("Error: Invalid token");
+  // Validate the token
+  try {
+    const payload = await jwtVerifier.verify(token); // Pass the token
+    console.log(JSON.stringify(payload));
+    cb(null, generatePolicy("user", "Allow", event.methodArn));
+  } catch (err) {
+    cb("Error: Invalid token");
   }
 };
