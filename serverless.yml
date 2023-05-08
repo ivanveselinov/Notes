@@ -79,7 +79,8 @@ functions:
           path: notes
           authorizer:
             name: userpool_autoriser
-            arn: ${ssm:/notes/dev/userpoolId}
+            type: COGNITO_USER_POOLS
+            arn: !GetAtt cognitoUserPool.Arn
 
 plugins:
   - serverless-iam-roles-per-function # Plugin to identity-based policy allows the dynamodb:PutItem action
