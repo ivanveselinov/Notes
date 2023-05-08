@@ -11,6 +11,9 @@ provider:
 functions:
   authorizer:
     handler: authorizer.handler
+    environment:
+      COGNITO_USERPOOL_ID: !Ref cognitoUserPool
+      COGNITO_WEB_CLIENT_ID: !Ref cognitoUserPoolWebClient
 
   createNote:
     handler: handler.createNote # This name is taken from handler.js
@@ -76,7 +79,7 @@ functions:
           path: notes
           authorizer:
             name: userpool_autoriser
-            arn: arn:aws:cognito-idp:ap-southeast-2:578982365571:userpool/ap-southeast-2_EExi0IXBz
+            arn: ${ssm:/notes/dev/userpoolId}
 
 plugins:
   - serverless-iam-roles-per-function # Plugin to identity-based policy allows the dynamodb:PutItem action

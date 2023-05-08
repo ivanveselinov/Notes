@@ -33,3 +33,11 @@ cognitoUserPoolDomain:
   Properties:
     UserPoolId: !Ref cognitoUserPool # This will return userPoolId
     Domain: mynotescd
+# Application paremeters
+
+userPoolIdParam:
+  Type: AWS::SSM::Parameter
+  Properties:
+    Name: /notes/dev/userpoolId # Recomended to create paramether name as a path
+    Type: String
+    Value: !GetAtt cognitoUserPool.Arn
