@@ -1,4 +1,5 @@
 const { CognitoJwtVerifier } = require("aws-jwt-verify"); // Install token verifier via npm i aws-jwt-verify
+
 const COGNITO_USERPOOL_ID = process.env.COGNITO_USERPOOL_ID;
 const COGNITO_WEB_CLIENT_ID = process.env.COGNITO_WEB_CLIENT_ID;
 
