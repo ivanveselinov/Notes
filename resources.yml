@@ -16,7 +16,7 @@ notesTable:
 cognitoUserPool:
   Type: AWS::Cognito::UserPool
   Properties:
-    UserPoolName: myNotesUP-${self:provider.stage}
+    UserPoolName: myNotesUP-${self:provider.stage} #Stage deployment
 
 # User pool web client
 
