@@ -20,7 +20,7 @@ phases:
       - serverless package --package my-artifact --stage qa
 artifacts:
   files:
-    - my-artifact/* # Upload all file to artifact folder
+    - my-artifact/* # Upload all file to artifact folder!
   name: MyProjectArtifact
 cache:
   paths:
