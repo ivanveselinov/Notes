@@ -1,0 +1,24 @@
+version: 0.2
+
+phases:
+  install:
+    on-failure: ABORT
+    runtime-versions:
+      nodejs: 14
+    commands:
+      - echo Installing serverless
+      - npm i -g serverless@2
+      - echo Installing npm dependencies of notes service
+      - npm install
+  build:
+    on-failure: ABORT
+    commands:
+      - echo Deploying resources
+      - serverless deploy --stage qa
+artifacts:
+  files:
+    - my-artifact/* # Upload all file to artifact folder!
+  name: MyProjectArtifact
+cache:
+  paths:
+    - "node_modules/**/*"
